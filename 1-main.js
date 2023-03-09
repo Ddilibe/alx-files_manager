@@ -7,19 +7,23 @@ const waitConnection = () => {
         const repeatFct = async () => {
             await setTimeout(() => {
                 i += 1;
-                if (i >= 10) {
+                if (i >= 100) {
                     reject()
                 }
                 else if(!dbClient.isAlive()) {
                     repeatFct()
+                    console.log("Trying...")
                 }
                 else {
                     resolve()
+                    console.log("Connected successfully");
                 }
             }, 1000);
         };
         repeatFct();
-    })
+    }).catch(error => {
+        console.log(`It was not able to connect. Error: ${error}`);
+    });
 };
 
 (async () => {
