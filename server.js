@@ -1,14 +1,12 @@
-import route from './routes/index';
+import router from './routes/index';
 
-import {express} from "express";
+const express = require('express');
 
 const app = express();
 const port = process.env.PORT || 5000;
 
-app.use(express.json());
-app.listen(PORT, () => {
-  console.log(`app listening on port : ${PORT}`);
-});
-app.use('/', route);
+router(app);
 
-module.exports = app;
+app.listen(port, () => {
+  console.log(`Listening at http://localhost:${port}`);
+});
